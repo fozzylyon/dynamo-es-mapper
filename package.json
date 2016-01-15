@@ -1,0 +1,26 @@
+{
+  "name": "dynamo-es-mapper",
+  "version": "1.0.0",
+  "description": "Maps dynamodb stream records into actions ready for the elasticsearch bulk API",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test"
+  },
+  "keywords": [
+    "dynamodb",
+    "elasticsearch"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fozzylyon/dynamo-es-mapper.git"
+  },
+  "author": "James Lyon <fozzylyon@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/fozzylyon/dynamo-es-mapper/issues"
+  },
+  "homepage": "https://github.com/fozzylyon/dynamo-es-mapper#readme",
+  "dependencies": {
+    "dynamodb-marshaler": "^1.2.2"
+  }
+}
