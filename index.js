@@ -16,10 +16,10 @@ module.exports = function(records, key) {
   var actions = [];
   records.forEach(function(rec) {
     if (rec.eventName === _types.REMOVE) {
-      actions.push(JSON.stringify({ delete: rec.dynamodb.Keys[key].S }));
+      actions.push(JSON.stringify({ delete: { _id: rec.dynamodb.Keys[key].S } }));
     }
     else {
-      actions.push(JSON.stringify({ update: rec.dynamodb.Keys[key].S }));
+      actions.push(JSON.stringify({ update: { _id: rec.dynamodb.Keys[key].S} }));
       actions.push(JSON.stringify({ doc: marshaler(rec.dynamodb.NewImage), doc_as_upsert: true }));
     }
   });
