@@ -1,6 +1,15 @@
 'use strict';
 
-var marshaler = require('dynamodb-marshaler').toJS;
+var AWS = require("aws-sdk");
+
+var docClient = new AWS.DynamoDB.DocumentClient();
+
+//Create a Translator object, which comes from the DocumentClient
+var dynamodbTranslator = docClient.getTranslator();
+
+//It needs a SDK 'shape'. The individual Items in the Stream record
+//are themselves the same Item shape as we see in a getItem response
+var ItemShape = docClient.service.api.operations.getItem.output.members.Item;
 
 var _defaultKey = '_id';
 
@@ -20,7 +29,7 @@ module.exports = function(records, key) {
     }
     else {
       actions.push(JSON.stringify({ update: { _id: rec.dynamodb.Keys[key].S} }));
-      actions.push(JSON.stringify({ doc: marshaler(rec.dynamodb.NewImage), doc_as_upsert: true }));
+      actions.push(JSON.stringify({ doc: dynamodbTranslator.translateOutput(rec.dynamodb.NewImage, ItemShape), doc_as_upsert: true }));
     }
   });
   return actions.join('\n') + '\n';
