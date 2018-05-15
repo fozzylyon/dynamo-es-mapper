@@ -21,6 +21,6 @@
   },
   "homepage": "https://github.com/fozzylyon/dynamo-es-mapper#readme",
   "dependencies": {
-    "dynamodb-marshaler": "^1.2.2"
+    "aws-sdk": "^2.157.0"
   }
 }
